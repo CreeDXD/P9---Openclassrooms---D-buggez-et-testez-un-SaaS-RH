@@ -19,9 +19,16 @@ const row = (bill) => {
     `)
   }
 
-const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
-}
+  const rows = (data) => {
+    if (data && data.length) {
+      data.sort(function (a,b) {
+        return new Date (b.date) - new Date (a.date);
+      });
+        return data.map(bill => row(bill)).join("");
+    }
+    return "";
+    // return (data && data.length) ?  data.map(bill => row(bill)).join("") : ""
+  }
 
 export default ({ data: bills, loading, error }) => {
   
