@@ -21,6 +21,7 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
+    console.log(fileName)
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
     formData.append('file', file)
@@ -31,7 +32,11 @@ export default class NewBill {
     const goodFormat = validExtensions.includes(fileExtension)
 
     if (!goodFormat) {
-      this.document.querySelector(`input[data-testid="file"]`).value = ""
+      this.document.querySelector(`input[data-testid="file"]`).value = ""   
+      alert('Format de fichier non valide (png, jpg, jpeg)') 
+    } else if(!fileName) {
+      this.document.querySelector(`input[data-testid="file"]`).value = ""    
+      alert('Nom de fichier non valide')
     } else {
       const formData = new FormData()
       const email = JSON.parse(localStorage.getItem("user")).email
